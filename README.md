@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Psychic — Vedic Astrology Platform
 
-## Getting Started
+Personalized Vedic astrology readings powered by real sidereal calculations.
 
-First, run the development server:
+## Quick Start
 
 ```bash
+npm install
+npx prisma db push
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Architecture
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Astrology Engine (`src/lib/astrology/`)
 
-## Learn More
+Self-contained Vedic astrology calculation engine with 4 layers:
 
-To learn more about Next.js, take a look at the following resources:
+| Layer | File(s) | Purpose |
+|-------|---------|---------|
+| **1. Astronomy** | `julian.ts`, `astronomy.ts` | Julian Day, planetary longitudes (Meeus/VSOP87), Lahiri ayanamsa, ascendant |
+| **2. Vedic Derivations** | `chart.ts`, `houses.ts`, `nakshatra.ts`, `dasha.ts` | Sidereal conversion, Whole Sign houses, 27 nakshatras, Vimshottari Dasha |
+| **3. Interpretation** | `interpretation.ts` | Rule-based personality, career, relationship, and dasha period themes |
+| **4. AI Context** | `ai-context.ts` | Compact structured object for LLM Q&A grounding |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Entry point:** `index.ts` → `generateChartReading(input)` returns complete `AstrologyEngineResponse`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Key Details
 
-## Deploy on Vercel
+- **Zodiac:** Sidereal (Lahiri ayanamsa)
+- **Houses:** Whole Sign system
+- **Dasha:** Vimshottari (120-year cycle) with Mahadasha + Antardasha
+- **Planets:** Sun, Moon, Mars, Mercury, Jupiter, Venus, Saturn, Rahu, Ketu
+- **Accuracy:** ±1-2° (sufficient for sign/nakshatra analysis; upgrade path: Swiss Ephemeris)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### API Routes
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Method | Route | Description |
+|--------|-------|-------------|
+| POST | `/api/chart/generate` | Generate chart from birth data |
+| GET | `/api/chart/[id]` | Retrieve saved chart |
+| POST | `/api/chart/[id]/questions` | Ask questions about chart |
+| POST | `/api/contact` | Submit contact form |
+| POST | `/api/auth/signup` | Create account |
+| POST | `/api/auth/login` | Sign in |
+
+### Database
+
+SQLite via Prisma. Models: `User`, `BirthProfile`, `ChartResult`, `QaMessage`, `ContactSubmission`.
+
+### Upgrading
+
+- **Better accuracy:** Replace `astronomy.ts` calculations with Swiss Ephemeris
+- **Real LLM Q&A:** Implement the `LLMService` interface in `questions/route.ts` with OpenAI/Gemini
+- **Geocoding:** Swap `NominatimGeocodingProvider` for Google Maps via the provider interface
+- **Interpretation:** Enhance `interpretation.ts` rules or use LLM rewriting
+
+## Tech Stack
+
+Next.js 14 · TypeScript · Tailwind CSS · Prisma · SQLite
+
+## Environment Variables
+
+Copy `.env.example` to `.env`. See file for all options.
