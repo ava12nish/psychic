@@ -39,8 +39,10 @@ export default function GetReadingPage() {
             });
             const data = await res.json();
 
-            if (data.success && data.id) {
-                router.push(`/reading/${data.id}`);
+            if (data.success && data.reading) {
+                // Store in session storage for stateless Vercel MVP
+                sessionStorage.setItem('psychic_reading_local', JSON.stringify(data.reading));
+                router.push(`/reading/local`);
             } else {
                 setServerError(data.error?.message || 'Failed to generate reading. Please try again.');
             }

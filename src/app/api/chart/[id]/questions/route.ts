@@ -87,7 +87,7 @@ export async function POST(
     try {
         const { id } = await params;
         const body = await request.json();
-        const { question } = body;
+        const { question, aiContext: providedAiContext } = body;
 
         if (!question || question.trim().length === 0) {
             return NextResponse.json(
@@ -96,35 +96,47 @@ export async function POST(
             );
         }
 
-        // Get chart data
-        const chartResult = await prisma.chartResult.findUnique({
-            where: { id },
-            include: { birthProfile: true },
-        });
+        let aiContextToUse: AiContext;
+        let fullNameToUse = "User";
 
-        if (!chartResult) {
-            return NextResponse.json(
-                { success: false, error: 'Chart not found' },
-                { status: 404 }
-            );
+        if (id === 'local' && providedAiContext) {
+            aiContextToUse = providedAiContext;
+        } else {
+            // Get chart data
+            const chartResult = await prisma.chartResult.findUnique({
+                where: { id },
+                include: { birthProfile: true },
+            });
+
+            if (!chartResult) {
+                return NextResponse.json(
+                    { success: false, error: 'Chart not found' },
+                    { status: 404 }
+                );
+            }
+            aiContextToUse = JSON.parse(chartResult.aiContext);
+            fullNameToUse = chartResult.birthProfile.fullName;
         }
 
-        const aiContext: AiContext = JSON.parse(chartResult.aiContext);
+
+
         const { buildLLMSystemPrompt } = await import('@/lib/astrology/ai-context');
 
         // Build system prompt from AI context
-        const systemPrompt = buildLLMSystemPrompt(aiContext, chartResult.birthProfile.fullName);
+        const systemPrompt = buildLLMSystemPrompt(aiContextToUse, fullNameToUse);
 
         // Generate response
         const response = await llmService.generateResponse(systemPrompt, question);
 
-        // Store messages
-        await prisma.qaMessage.createMany({
-            data: [
-                { chartResultId: id, role: 'user', content: question },
-                { chartResultId: id, role: 'assistant', content: response },
-            ],
-        });
+        // Store messages if not local
+        if (id !== 'local') {
+            await prisma.qaMessage.createMany({
+                data: [
+                    { chartResultId: id, role: 'user', content: question },
+                    { chartResultId: id, role: 'assistant', content: response },
+                ],
+            });
+        }
 
         return NextResponse.json({
             success: true,

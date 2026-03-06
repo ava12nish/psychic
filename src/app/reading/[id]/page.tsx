@@ -45,6 +45,7 @@ interface ChartData {
         mindfulnessNotes: string[];
         lifePathSummary: string;
     };
+    aiContext: any;
     messages: Array<{ role: string; content: string; createdAt: string }>;
 }
 
@@ -73,6 +74,27 @@ export default function ReadingPage() {
     }, [id]);
 
     const fetchChart = async () => {
+        if (id === 'local') {
+            try {
+                const stored = sessionStorage.getItem('psychic_reading_local');
+                if (stored) {
+                    const parsed = JSON.parse(stored);
+                    setData(parsed);
+                    setMessages(parsed.messages || []);
+                    setLoading(false);
+                    return;
+                } else {
+                    setError('No local reading found. Please generate a new one.');
+                    setLoading(false);
+                    return;
+                }
+            } catch {
+                setError('Failed to load local reading.');
+                setLoading(false);
+                return;
+            }
+        }
+
         try {
             const res = await fetch(`/api/chart/${id}`);
             const json = await res.json();
@@ -100,7 +122,7 @@ export default function ReadingPage() {
             const res = await fetch(`/api/chart/${id}/questions`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ question: questionText }),
+                body: JSON.stringify({ question: questionText, aiContext: data?.aiContext }),
             });
             const json = await res.json();
             if (json.success) {
@@ -191,8 +213,8 @@ export default function ReadingPage() {
                             key={tab}
                             onClick={() => setActiveTab(tab)}
                             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap ${activeTab === tab
-                                    ? 'bg-accent-700 text-white'
-                                    : 'text-neutral-600 hover:bg-neutral-100'
+                                ? 'bg-accent-700 text-white'
+                                : 'text-neutral-600 hover:bg-neutral-100'
                                 }`}
                         >
                             {tab === 'overview' ? 'Overview' : tab === 'planets' ? 'Planetary Placements' : tab === 'houses' ? 'Houses' : 'Dasha Timeline'}
@@ -353,8 +375,8 @@ export default function ReadingPage() {
                                                 <div
                                                     key={i}
                                                     className={`flex items-center justify-between p-3 rounded-lg transition-colors ${d.isActive
-                                                            ? 'bg-accent-50 border-2 border-accent-300'
-                                                            : 'bg-neutral-50 border border-neutral-100 hover:bg-neutral-100'
+                                                        ? 'bg-accent-50 border-2 border-accent-300'
+                                                        : 'bg-neutral-50 border border-neutral-100 hover:bg-neutral-100'
                                                         }`}
                                                 >
                                                     <div className="flex items-center gap-3">
@@ -439,8 +461,8 @@ export default function ReadingPage() {
                                         <div
                                             key={i}
                                             className={`p-3 rounded-xl text-sm ${m.role === 'user'
-                                                    ? 'bg-accent-700 text-white ml-4'
-                                                    : 'bg-neutral-100 text-neutral-700 mr-4'
+                                                ? 'bg-accent-700 text-white ml-4'
+                                                : 'bg-neutral-100 text-neutral-700 mr-4'
                                                 }`}
                                         >
                                             {m.content}

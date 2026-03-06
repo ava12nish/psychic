@@ -5,7 +5,6 @@
 
 import { NextResponse } from 'next/server';
 import { generateChartReading, AstrologyEngineError } from '@/lib/astrology';
-import { prisma } from '@/lib/db/prisma';
 
 export async function POST(request: Request) {
     try {
@@ -20,9 +19,10 @@ export async function POST(request: Request) {
             birthPlace,
         });
 
-        // Store in database
-        const birthProfile = await prisma.birthProfile.create({
-            data: {
+        // Stateless mode: Skip database, format and return directly to client
+        const formattedChartData = {
+            id: 'local',
+            birthProfile: {
                 fullName,
                 birthDate,
                 birthTime,
@@ -30,24 +30,18 @@ export async function POST(request: Request) {
                 latitude: reading.resolvedBirthData.latitude,
                 longitude: reading.resolvedBirthData.longitude,
                 timezone: reading.resolvedBirthData.timezone,
-                chartResult: {
-                    create: {
-                        chartData: JSON.stringify(reading.chart),
-                        dashaData: JSON.stringify(reading.dasha),
-                        interpretation: JSON.stringify(reading.interpretation),
-                        aiContext: JSON.stringify(reading.aiContext),
-                    },
-                },
             },
-            include: {
-                chartResult: true,
-            },
-        });
+            chartData: reading.chart,
+            dashaData: reading.dasha,
+            interpretation: reading.interpretation,
+            aiContext: reading.aiContext,
+            messages: []
+        };
 
         return NextResponse.json({
             success: true,
-            id: birthProfile.chartResult?.id,
-            reading,
+            id: 'local',
+            reading: formattedChartData,
         });
     } catch (error) {
         if (error instanceof AstrologyEngineError) {
