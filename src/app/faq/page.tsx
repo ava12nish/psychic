@@ -77,28 +77,28 @@ const faqs = [
 
 export default function FAQPage() {
     return (
-        <div>
-            <section className="py-20 sm:py-28 bg-gradient-to-b from-accent-50/40 to-white">
+        <div className="relative z-10 pt-32 pb-24">
+            <section className="mb-16">
                 <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h1 className="text-4xl sm:text-5xl font-bold text-neutral-900 tracking-tight">
+                    <h1 className="text-4xl sm:text-5xl font-bold text-white tracking-tight mb-4">
                         Frequently asked questions
                     </h1>
-                    <p className="mt-6 text-lg text-neutral-600 leading-relaxed">
+                    <p className="text-lg text-neutral-400 leading-relaxed">
                         Everything you need to know about Psychic and Vedic astrology.
                     </p>
                 </div>
             </section>
 
-            <section className="py-20 bg-white">
+            <section>
                 <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
                     {faqs.map((category) => (
                         <div key={category.category} className="mb-16 last:mb-0">
-                            <h2 className="text-xl font-bold text-neutral-900 mb-6">{category.category}</h2>
+                            <h2 className="text-xl font-bold text-white mb-6 border-b border-white/10 pb-4">{category.category}</h2>
                             <div className="space-y-4">
                                 {category.items.map((faq) => (
-                                    <div key={faq.q} className="p-5 rounded-xl bg-neutral-50 border border-neutral-200">
-                                        <h3 className="text-sm font-semibold text-neutral-900 mb-2">{faq.q}</h3>
-                                        <p className="text-sm text-neutral-600 leading-relaxed">{faq.a}</p>
+                                    <div key={faq.q} className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-lg hover:bg-white/10 transition-colors">
+                                        <h3 className="text-base font-semibold text-white mb-3">{faq.q}</h3>
+                                        <p className="text-sm text-neutral-400 leading-relaxed">{faq.a}</p>
                                     </div>
                                 ))}
                             </div>

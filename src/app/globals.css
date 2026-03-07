@@ -1,50 +1,37 @@
 @import "tailwindcss";
 
 /* ============================================================================
-   Psychic — Design System Tokens & Global Styles
+   Psychic — Deep Cosmic Theme Tokens & Glassmorphism Global Styles
    ============================================================================ */
 
 @theme inline {
-  /* Brand Colors */
-  --color-brand-50: #f5f3f0;
-  --color-brand-100: #ebe7e0;
-  --color-brand-200: #d6cfc2;
-  --color-brand-300: #c2b7a4;
-  --color-brand-400: #a89a7f;
-  --color-brand-500: #8e7d5e;
-  --color-brand-600: #74654a;
-  --color-brand-700: #5a4e3a;
-  --color-brand-800: #3f372a;
-  --color-brand-900: #25201a;
+  /* Cosmic Dark/Neutral Palette */
+  --color-neutral-50: #f8fafc;
+  --color-neutral-100: #f1f5f9;
+  --color-neutral-200: #e2e8f0;
+  --color-neutral-300: #cbd5e1;
+  --color-neutral-400: #94a3b8;
+  --color-neutral-500: #64748b;
+  --color-neutral-600: #475569;
+  --color-neutral-700: #334155;
+  --color-neutral-800: #1e293b;
+  --color-neutral-900: #0f172a;
+  --color-neutral-950: #020617;
+  /* Deep Space Black */
 
-  /* Accent */
-  --color-accent-50: #f0f4f8;
-  --color-accent-100: #d9e2ec;
-  --color-accent-200: #bcccdc;
-  --color-accent-300: #9fb3c8;
-  --color-accent-400: #829ab1;
-  --color-accent-500: #627d98;
-  --color-accent-600: #486581;
-  --color-accent-700: #334e68;
-  --color-accent-800: #243b53;
-  --color-accent-900: #102a43;
-
-  /* Neutral */
-  --color-neutral-50: #fafaf9;
-  --color-neutral-100: #f5f5f4;
-  --color-neutral-200: #e7e5e4;
-  --color-neutral-300: #d6d3d1;
-  --color-neutral-400: #a8a29e;
-  --color-neutral-500: #78716c;
-  --color-neutral-600: #57534e;
-  --color-neutral-700: #44403c;
-  --color-neutral-800: #292524;
-  --color-neutral-900: #1c1917;
-
-  /* Success / Warning / Error */
-  --color-success: #22c55e;
-  --color-warning: #f59e0b;
-  --color-error: #ef4444;
+  /* Glowing Accent Palette (Indigo/Cyan blend) */
+  --color-accent-50: #eff6ff;
+  --color-accent-100: #dbeafe;
+  --color-accent-200: #bfdbfe;
+  --color-accent-300: #93c5fd;
+  --color-accent-400: #60a5fa;
+  --color-accent-500: #3b82f6;
+  /* Glowing blue */
+  --color-accent-600: #2563eb;
+  --color-accent-700: #1d4ed8;
+  --color-accent-800: #1e40af;
+  --color-accent-900: #1e3a8a;
+  --color-accent-950: #172554;
 
   /* Fonts */
   --font-sans: var(--font-geist-sans), 'Inter', system-ui, -apple-system, sans-serif;
@@ -53,12 +40,19 @@
 }
 
 :root {
-  --background: #fafaf9;
-  --foreground: #1c1917;
-  --card-bg: #ffffff;
-  --card-border: #e7e5e4;
-  --input-border: #d6d3d1;
-  --section-bg: #f5f5f4;
+  /* Default to Dark Mode Deep Cosmic Theme */
+  --background: #020617;
+  /* Slate 950 */
+  --foreground: #f8fafc;
+  /* Slate 50 */
+  --card-bg: rgba(30, 41, 59, 0.4);
+  /* Slate 800 with opacity */
+  --card-border: rgba(255, 255, 255, 0.08);
+  --input-bg: rgba(15, 23, 42, 0.5);
+  /* Slate 900 with opacity */
+  --input-border: rgba(255, 255, 255, 0.12);
+  --section-bg: #0f172a;
+  /* Slate 900 */
 }
 
 body {
@@ -72,8 +66,36 @@ body {
 /* ============================================================================
    Smooth transitions globally
    ============================================================================ */
-a, button, input, textarea, select {
-  transition: all 0.2s ease;
+a,
+button,
+input,
+textarea,
+select {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ============================================================================
+   Lenis Smooth Scrolling base styles
+   ============================================================================ */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
 }
 
 /* ============================================================================
@@ -88,49 +110,91 @@ a, button, input, textarea, select {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #d6d3d1;
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #a8a29e;
+  background: rgba(255, 255, 255, 0.2);
 }
 
 /* ============================================================================
-   Form focus styles
+   Form focus styles (Premium Glow)
    ============================================================================ */
-input:focus, textarea:focus, select:focus {
+input:focus,
+textarea:focus,
+select:focus {
   outline: none;
-  border-color: #627d98;
-  box-shadow: 0 0 0 3px rgba(98, 125, 152, 0.15);
+  border-color: rgba(96, 165, 250, 0.5);
+  /* Accent 400 */
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.15), 0 0 15px rgba(59, 130, 246, 0.2);
 }
 
 /* ============================================================================
    Animation utilities
    ============================================================================ */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes slideUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes pulse-subtle {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes orbit {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.5s ease forwards;
+  animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animate-slide-up {
-  animation: slideUp 0.6s ease forwards;
+  animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animate-pulse-subtle {
-  animation: pulse-subtle 2s ease-in-out infinite;
+  animation: pulse-subtle 3s ease-in-out infinite;
+}
+
+.animate-orbit {
+  animation: orbit 40s linear infinite;
+}
+
+.animate-orbit-slow {
+  animation: orbit 80s linear infinite reverse;
 }

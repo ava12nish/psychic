@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import { FadeIn } from '@/components/ui/FadeIn';
+import { Stagger, StaggerItem } from '@/components/ui/Stagger';
 
 const steps = [
   {
@@ -81,258 +83,215 @@ const faqs = [
 
 export default function HomePage() {
   return (
-    <div>
+    <div className="overflow-hidden">
       {/* ================================ HERO ================================ */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-white via-accent-50/30 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-24 sm:pt-28 sm:pb-32">
-          <div className="max-w-3xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-100 text-accent-700 text-xs font-medium mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-accent-500" />
-              Vedic Astrology · Jyotish
-            </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-neutral-900 leading-tight tracking-tight">
-              Understand your chart.{' '}
-              <span className="text-accent-700">Navigate your timing.</span>
-            </h1>
-            <p className="mt-6 text-lg sm:text-xl text-neutral-600 leading-relaxed max-w-2xl mx-auto">
-              Personalized Vedic astrology readings with real sidereal calculations,
-              Mahadasha timelines, and chart-based insights — designed for the modern seeker.
-            </p>
-            <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link
-                href="/get-reading"
-                className="w-full sm:w-auto px-8 py-3.5 text-base font-semibold text-white bg-accent-700 hover:bg-accent-800 rounded-xl transition-all shadow-lg shadow-accent-700/20 hover:shadow-xl hover:shadow-accent-700/30"
-              >
-                Get Your Free Reading
-              </Link>
-              <Link
-                href="/how-it-works"
-                className="w-full sm:w-auto px-8 py-3.5 text-base font-semibold text-neutral-700 bg-white hover:bg-neutral-50 rounded-xl border border-neutral-300 transition-colors"
-              >
-                How It Works
-              </Link>
-            </div>
+      <section className="relative pt-32 pb-24 sm:pt-40 sm:pb-32">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto text-center">
+            <FadeIn delay={0.1}>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-accent-300 text-xs font-semibold tracking-wide uppercase mb-8 backdrop-blur-md">
+                <span className="w-2 h-2 rounded-full bg-accent-400 animate-pulse" />
+                Vedic Astrology Reimagined
+              </div>
+            </FadeIn>
+
+            <FadeIn delay={0.2}>
+              <h1 className="text-5xl sm:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-white via-neutral-200 to-neutral-500 leading-tight tracking-tight mb-8">
+                Decode your stars.<br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-400 to-indigo-400">Master your timeline.</span>
+              </h1>
+            </FadeIn>
+
+            <FadeIn delay={0.3}>
+              <p className="text-lg sm:text-xl text-neutral-400 leading-relaxed max-w-2xl mx-auto mb-12">
+                Hyper-accurate sidereal calculations, Mahadasha timelines, and deep personalized insights—wrapped in a beautiful, modern interface.
+              </p>
+            </FadeIn>
+
+            <FadeIn delay={0.4}>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <Link
+                  href="/get-reading"
+                  className="w-full sm:w-auto px-8 py-4 text-base font-semibold text-white bg-accent-600 hover:bg-accent-500 rounded-xl transition-all shadow-[0_0_30px_rgba(37,99,235,0.3)] hover:shadow-[0_0_40px_rgba(59,130,246,0.5)] border border-accent-400/30"
+                >
+                  Get Your Free Reading
+                </Link>
+                <Link
+                  href="/how-it-works"
+                  className="w-full sm:w-auto px-8 py-4 text-base font-semibold text-white bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 transition-colors backdrop-blur-md"
+                >
+                  See How It Works
+                </Link>
+              </div>
+            </FadeIn>
           </div>
-        </div>
-        {/* Decorative gradient */}
-        <div className="absolute inset-0 -z-10 overflow-hidden">
-          <div className="absolute top-20 left-1/4 w-72 h-72 bg-accent-200/30 rounded-full blur-3xl" />
-          <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-brand-200/20 rounded-full blur-3xl" />
         </div>
       </section>
 
       {/* ================================ BENEFITS ================================ */}
-      <section className="py-20 sm:py-28 bg-white">
+      <section className="py-24 sm:py-32 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-neutral-900 tracking-tight">
+          <FadeIn className="text-center mb-16">
+            <h2 className="text-3xl sm:text-5xl font-bold text-white tracking-tight">
               Why Psychic is different
             </h2>
-            <p className="mt-4 text-lg text-neutral-600 max-w-2xl mx-auto">
-              Real calculations, real insights — not recycled horoscope content.
+            <p className="mt-4 text-lg text-neutral-400 max-w-2xl mx-auto">
+              Real computational precision, elegant design.
             </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          </FadeIn>
+
+          <Stagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {benefits.map((benefit) => (
-              <div
-                key={benefit.title}
-                className="p-6 rounded-2xl bg-neutral-50 border border-neutral-200 hover:border-accent-300 hover:shadow-lg transition-all group"
-              >
-                <div className="w-10 h-10 rounded-lg bg-accent-100 text-accent-700 flex items-center justify-center text-lg font-bold mb-4 group-hover:bg-accent-200 transition-colors">
-                  {benefit.icon}
+              <StaggerItem key={benefit.title}>
+                <div className="h-full p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-accent-500/50 hover:bg-white/[0.08] transition-all group backdrop-blur-xl">
+                  <div className="w-12 h-12 rounded-xl bg-accent-500/20 text-accent-400 flex items-center justify-center text-2xl mb-6 group-hover:bg-accent-500/30 group-hover:scale-110 transition-all shadow-[0_0_15px_rgba(59,130,246,0.15)]">
+                    {benefit.icon}
+                  </div>
+                  <h3 className="text-lg font-semibold text-white mb-3">{benefit.title}</h3>
+                  <p className="text-sm text-neutral-400 leading-relaxed">{benefit.description}</p>
                 </div>
-                <h3 className="text-base font-semibold text-neutral-900 mb-2">{benefit.title}</h3>
-                <p className="text-sm text-neutral-600 leading-relaxed">{benefit.description}</p>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
 
       {/* ================================ HOW IT WORKS ================================ */}
-      <section className="py-20 sm:py-28 bg-neutral-50">
+      <section className="py-24 sm:py-32 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-neutral-900 tracking-tight">
-              How it works
+          <FadeIn className="text-center mb-16">
+            <h2 className="text-3xl sm:text-5xl font-bold text-white tracking-tight">
+              The Path to Clarity
             </h2>
-            <p className="mt-4 text-lg text-neutral-600 max-w-2xl mx-auto">
-              From birth details to personalized insights in minutes.
+            <p className="mt-4 text-lg text-neutral-400 max-w-2xl mx-auto">
+              From birth details to profound insights in seconds.
             </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {steps.map((step, i) => (
-              <div key={step.number} className="relative">
-                <div className="text-5xl font-bold text-accent-200 mb-3">{step.number}</div>
-                <h3 className="text-base font-semibold text-neutral-900 mb-2">{step.title}</h3>
-                <p className="text-sm text-neutral-600 leading-relaxed">{step.description}</p>
-                {i < steps.length - 1 && (
-                  <div className="hidden md:block absolute top-8 right-0 w-8 text-accent-300 translate-x-4">→</div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+          </FadeIn>
 
-      {/* ================================ SAMPLE PREVIEW ================================ */}
-      <section className="py-20 sm:py-28 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-neutral-900 tracking-tight">
-                A glimpse of your reading
-              </h2>
-              <p className="mt-4 text-lg text-neutral-600">
-                See the kind of personalized insight you will receive.
-              </p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="p-6 rounded-2xl bg-neutral-50 border border-neutral-200">
-                <div className="text-xs font-semibold text-accent-600 uppercase tracking-wider mb-3">Chart Summary</div>
-                <p className="text-sm text-neutral-700 leading-relaxed">
-                  Aries ascendant with Moon in Rohini nakshatra. Sun in Taurus, Mercury conjunct Venus in the 2nd house.
-                  Strong 10th house activity suggests career-oriented life themes.
-                </p>
-              </div>
-              <div className="p-6 rounded-2xl bg-neutral-50 border border-neutral-200">
-                <div className="text-xs font-semibold text-accent-600 uppercase tracking-wider mb-3">Current Period</div>
-                <p className="text-sm text-neutral-700 leading-relaxed">
-                  Jupiter Mahadasha / Venus Antardasha. Period of expansion in relationships, creative expression,
-                  and financial growth. Favorable for partnerships and artistic pursuits.
-                </p>
-              </div>
-              <div className="p-6 rounded-2xl bg-neutral-50 border border-neutral-200">
-                <div className="text-xs font-semibold text-accent-600 uppercase tracking-wider mb-3">Key Insight</div>
-                <p className="text-sm text-neutral-700 leading-relaxed">
-                  With Jupiter exalted and currently active as your Mahadasha lord, this is a significant period for wisdom,
-                  spiritual growth, and professional advancement.
-                </p>
-              </div>
-            </div>
-          </div>
+          <Stagger className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            {steps.map((step, i) => (
+              <StaggerItem key={step.number} className="relative">
+                <div className="text-6xl font-black text-white/5 mb-4 group-hover:text-white/10 transition-colors">{step.number}</div>
+                <h3 className="text-lg font-semibold text-white mb-3">{step.title}</h3>
+                <p className="text-sm text-neutral-400 leading-relaxed">{step.description}</p>
+                {i < steps.length - 1 && (
+                  <div className="hidden md:block absolute top-10 right-0 w-8 text-accent-500/50 translate-x-4">→</div>
+                )}
+              </StaggerItem>
+            ))}
+          </Stagger>
         </div>
       </section>
 
       {/* ================================ DASHA TEASER ================================ */}
-      <section className="py-20 sm:py-28 bg-neutral-50">
+      <section className="py-24 sm:py-32 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-100 text-brand-700 text-xs font-medium mb-4">
+          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <FadeIn direction="left">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-semibold uppercase tracking-wider mb-6">
                 Vimshottari Dasha
               </div>
-              <h2 className="text-3xl font-bold text-neutral-900 tracking-tight mb-4">
-                Understand your life timing
+              <h2 className="text-4xl sm:text-5xl font-bold text-white tracking-tight mb-6 leading-tight">
+                Understand your <br /><span className="text-indigo-400">life timing.</span>
               </h2>
-              <p className="text-neutral-600 leading-relaxed mb-6">
+              <p className="text-lg text-neutral-400 leading-relaxed mb-8">
                 The Vimshottari Dasha system maps a 120-year cycle of planetary periods,
                 revealing the themes and energies that define each phase of your life.
                 Know when to act, when to wait, and what to focus on.
               </p>
               <Link
                 href="/get-reading"
-                className="inline-flex px-6 py-2.5 text-sm font-semibold text-white bg-accent-700 hover:bg-accent-800 rounded-lg transition-colors"
+                className="inline-flex px-8 py-3.5 text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-500 rounded-xl transition-colors shadow-[0_0_20px_rgba(79,70,229,0.3)] border border-indigo-500/50"
               >
                 Calculate Your Dasha
               </Link>
-            </div>
-            <div className="p-6 rounded-2xl bg-white border border-neutral-200 shadow-sm">
-              <div className="text-xs font-semibold text-neutral-500 uppercase tracking-wider mb-4">Sample Dasha Timeline</div>
-              <div className="space-y-3">
-                {[
-                  { lord: 'Jupiter', years: '2018 – 2034', active: true },
-                  { lord: 'Saturn', years: '2034 – 2053', active: false },
-                  { lord: 'Mercury', years: '2053 – 2070', active: false },
-                ].map((d) => (
-                  <div
-                    key={d.lord}
-                    className={`flex items-center justify-between p-3 rounded-lg ${d.active ? 'bg-accent-50 border border-accent-200' : 'bg-neutral-50 border border-neutral-100'
-                      }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className={`w-2 h-2 rounded-full ${d.active ? 'bg-accent-500' : 'bg-neutral-300'}`} />
-                      <span className={`text-sm font-medium ${d.active ? 'text-accent-800' : 'text-neutral-600'}`}>
-                        {d.lord} Mahadasha
+            </FadeIn>
+
+            <FadeIn direction="right">
+              <div className="p-8 rounded-3xl bg-neutral-900/50 border border-white/10 backdrop-blur-xl shadow-2xl relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-transparent pointer-events-none" />
+                <div className="text-xs font-semibold text-neutral-500 uppercase tracking-wider mb-6">Sample Dasha Timeline</div>
+                <div className="space-y-4">
+                  {[
+                    { lord: 'Jupiter', years: '2018 – 2034', active: true },
+                    { lord: 'Saturn', years: '2034 – 2053', active: false },
+                    { lord: 'Mercury', years: '2053 – 2070', active: false },
+                  ].map((d) => (
+                    <div
+                      key={d.lord}
+                      className={`flex items-center justify-between p-4 rounded-xl transition-all ${d.active
+                          ? 'bg-indigo-500/10 border border-indigo-500/30 shadow-[0_0_15px_rgba(79,70,229,0.1)]'
+                          : 'bg-white/5 border border-white/5'
+                        }`}
+                    >
+                      <div className="flex items-center gap-4">
+                        <div className={`w-2.5 h-2.5 rounded-full ${d.active ? 'bg-indigo-400 shadow-[0_0_10px_rgba(129,140,248,0.8)]' : 'bg-neutral-600'}`} />
+                        <span className={`text-base font-medium ${d.active ? 'text-indigo-200' : 'text-neutral-400'}`}>
+                          {d.lord} Mahadasha
+                        </span>
+                      </div>
+                      <span className={`text-sm ${d.active ? 'text-indigo-400 font-semibold' : 'text-neutral-500'}`}>
+                        {d.years}
+                        {d.active && <span className="ml-2 animate-pulse">•</span>}
                       </span>
                     </div>
-                    <span className={`text-xs ${d.active ? 'text-accent-600 font-semibold' : 'text-neutral-500'}`}>
-                      {d.years}
-                      {d.active && ' (Active)'}
-                    </span>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
+            </FadeIn>
           </div>
         </div>
       </section>
 
       {/* ================================ TESTIMONIALS ================================ */}
-      <section className="py-20 sm:py-28 bg-white">
+      <section className="py-24 sm:py-32 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-neutral-900 tracking-tight">
+          <FadeIn className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
               What people are saying
             </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          </FadeIn>
+          <Stagger className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {testimonials.map((t) => (
-              <div key={t.name} className="p-6 rounded-2xl bg-neutral-50 border border-neutral-200">
-                <p className="text-sm text-neutral-700 leading-relaxed mb-4 italic">
-                  &ldquo;{t.quote}&rdquo;
-                </p>
-                <div>
-                  <p className="text-sm font-semibold text-neutral-900">{t.name}</p>
-                  <p className="text-xs text-neutral-500">{t.role}</p>
+              <StaggerItem key={t.name}>
+                <div className="p-8 h-full rounded-3xl bg-white/5 border border-white/10 backdrop-blur-lg">
+                  <div className="text-accent-400 text-4xl mb-4 font-serif">"</div>
+                  <p className="text-neutral-300 leading-relaxed mb-8 italic">
+                    {t.quote}
+                  </p>
+                  <div>
+                    <p className="text-sm font-bold text-white">{t.name}</p>
+                    <p className="text-xs text-neutral-500 mt-1">{t.role}</p>
+                  </div>
                 </div>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ================================ FAQ PREVIEW ================================ */}
-      <section className="py-20 sm:py-28 bg-neutral-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-neutral-900 tracking-tight">
-                Common questions
-              </h2>
-            </div>
-            <div className="space-y-4">
-              {faqs.map((faq) => (
-                <div key={faq.q} className="p-5 rounded-xl bg-white border border-neutral-200">
-                  <h3 className="text-sm font-semibold text-neutral-900 mb-2">{faq.q}</h3>
-                  <p className="text-sm text-neutral-600 leading-relaxed">{faq.a}</p>
-                </div>
-              ))}
-            </div>
-            <div className="text-center mt-8">
-              <Link href="/faq" className="text-sm font-medium text-accent-700 hover:text-accent-800 transition-colors">
-                View all FAQ →
-              </Link>
-            </div>
-          </div>
+          </Stagger>
         </div>
       </section>
 
       {/* ================================ CTA ================================ */}
-      <section className="py-20 sm:py-28 bg-accent-800">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
-            Ready to understand your chart?
-          </h2>
-          <p className="mt-4 text-lg text-accent-200 max-w-xl mx-auto">
-            Enter your birth details and receive your personalized Vedic astrology reading in minutes.
-          </p>
-          <Link
-            href="/get-reading"
-            className="inline-flex mt-8 px-8 py-3.5 text-base font-semibold text-accent-800 bg-white hover:bg-neutral-100 rounded-xl transition-colors shadow-lg"
-          >
-            Get Your Free Reading
-          </Link>
+      <section className="py-32 relative overflow-hidden">
+        <div className="absolute inset-0 bg-accent-950/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-transparent" />
+
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <FadeIn>
+            <h2 className="text-4xl sm:text-6xl font-bold text-white tracking-tight leading-tight">
+              Ready to decode <br />your cosmic blueprint?
+            </h2>
+            <p className="mt-6 text-xl text-neutral-400 max-w-2xl mx-auto">
+              Get an impossibly precise, personalized Vedic astrology reading in seconds.
+            </p>
+            <div className="mt-12">
+              <Link
+                href="/get-reading"
+                className="inline-flex px-10 py-5 text-lg font-bold text-white bg-accent-600 hover:bg-accent-500 rounded-2xl transition-all shadow-[0_0_40px_rgba(37,99,235,0.4)] hover:shadow-[0_0_60px_rgba(59,130,246,0.6)] border border-accent-400/50 hover:scale-105"
+              >
+                Get Your Free Reading Now
+              </Link>
+            </div>
+          </FadeIn>
         </div>
       </section>
     </div>

@@ -17,7 +17,7 @@ export default function Header() {
 
     return (
         <div className="sticky top-4 z-50 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 md:mt-6 mb-4 md:mb-8 pointer-events-none">
-            <header className="w-full bg-white/85 backdrop-blur-lg border border-neutral-200/80 shadow-lg shadow-neutral-200/30 rounded-2xl pointer-events-auto transition-all">
+            <header className="w-full bg-neutral-900/50 backdrop-blur-xl border border-white/10 shadow-lg shadow-black/50 rounded-2xl pointer-events-auto transition-all">
                 <div className="px-4 sm:px-5">
                     <div className="flex items-center justify-between h-16">
                         {/* Logo */}
@@ -29,7 +29,7 @@ export default function Header() {
                                 height={32}
                                 className="rounded-lg shadow-sm"
                             />
-                            <span className="text-lg font-semibold text-neutral-900 group-hover:text-accent-700 transition-colors">
+                            <span className="text-lg font-semibold text-neutral-50 group-hover:text-accent-400 transition-colors">
                                 Psychic
                             </span>
                         </Link>
@@ -40,7 +40,7 @@ export default function Header() {
                                 <Link
                                     key={item.name}
                                     href={item.href}
-                                    className="px-3 py-2 text-sm font-medium text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100 rounded-lg transition-colors"
+                                    className="px-3 py-2 text-sm font-medium text-neutral-400 hover:text-neutral-50 hover:bg-white/5 rounded-lg transition-colors"
                                 >
                                     {item.name}
                                 </Link>
@@ -51,13 +51,13 @@ export default function Header() {
                         <div className="hidden md:flex items-center gap-3">
                             <Link
                                 href="/login"
-                                className="px-3 py-2 text-sm font-medium text-neutral-600 hover:text-neutral-900 transition-colors"
+                                className="px-3 py-2 text-sm font-medium text-neutral-400 hover:text-neutral-50 hover:bg-white/5 rounded-lg transition-colors"
                             >
                                 Sign In
                             </Link>
                             <Link
                                 href="/get-reading"
-                                className="px-4 py-2 text-sm font-semibold text-white bg-accent-700 hover:bg-accent-800 rounded-lg transition-colors shadow-sm"
+                                className="relative px-4 py-2 text-sm font-semibold text-white bg-accent-600 hover:bg-accent-500 rounded-lg transition-colors shadow-[0_0_20px_rgba(37,99,235,0.4)] hover:shadow-[0_0_25px_rgba(59,130,246,0.6)] border border-accent-400/50"
                             >
                                 Get Your Reading
                             </Link>
@@ -65,7 +65,7 @@ export default function Header() {
 
                         {/* Mobile Hamburger */}
                         <button
-                            className="md:hidden p-2 rounded-lg text-neutral-600 hover:bg-neutral-100 transition-colors"
+                            className="md:hidden p-2 rounded-lg text-neutral-400 hover:bg-white/5 transition-colors"
                             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                             aria-label="Toggle menu"
                         >
@@ -83,29 +83,29 @@ export default function Header() {
 
                     {/* Mobile Menu */}
                     {mobileMenuOpen && (
-                        <div className="md:hidden border-t border-neutral-200/50 py-4 animate-fade-in px-2">
+                        <div className="md:hidden border-t border-white/10 py-4 animate-fade-in px-2">
                             <nav className="flex flex-col gap-1">
                                 {navigation.map((item) => (
                                     <Link
                                         key={item.name}
                                         href={item.href}
-                                        className="px-3 py-2.5 text-sm font-medium text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100 rounded-lg transition-colors"
+                                        className="px-3 py-2.5 text-sm font-medium text-neutral-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
                                         onClick={() => setMobileMenuOpen(false)}
                                     >
                                         {item.name}
                                     </Link>
                                 ))}
-                                <hr className="my-2 border-neutral-200/50" />
+                                <hr className="my-2 border-white/10" />
                                 <Link
                                     href="/login"
-                                    className="px-3 py-2.5 text-sm font-medium text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100 rounded-lg transition-colors"
+                                    className="px-3 py-2.5 text-sm font-medium text-neutral-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
                                     onClick={() => setMobileMenuOpen(false)}
                                 >
                                     Sign In
                                 </Link>
                                 <Link
                                     href="/get-reading"
-                                    className="mx-3 mt-1 px-4 py-2.5 text-sm font-semibold text-white bg-accent-700 hover:bg-accent-800 rounded-lg transition-colors text-center"
+                                    className="mx-3 mt-2 px-4 py-2.5 text-sm font-semibold text-white bg-accent-600 hover:bg-accent-500 rounded-lg transition-colors text-center border border-accent-400/50 shadow-[0_0_15px_rgba(37,99,235,0.3)]"
                                     onClick={() => setMobileMenuOpen(false)}
                                 >
                                     Get Your Reading
