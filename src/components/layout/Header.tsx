@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState } from 'react';
 
 const navigation = [
@@ -21,9 +22,13 @@ export default function Header() {
                     <div className="flex items-center justify-between h-16">
                         {/* Logo */}
                         <Link href="/" className="flex items-center gap-2 group">
-                            <div className="w-8 h-8 rounded-lg bg-accent-700 flex items-center justify-center">
-                                <span className="text-white font-bold text-sm">P</span>
-                            </div>
+                            <Image
+                                src="/logo.png"
+                                alt="Psychic Logo"
+                                width={32}
+                                height={32}
+                                className="rounded-lg shadow-sm"
+                            />
                             <span className="text-lg font-semibold text-neutral-900 group-hover:text-accent-700 transition-colors">
                                 Psychic
                             </span>
