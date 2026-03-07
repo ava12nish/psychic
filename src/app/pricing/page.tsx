@@ -68,26 +68,26 @@ const plans = [
 export default function PricingPage() {
     return (
         <div>
-            <section className="py-20 sm:py-28 bg-gradient-to-b from-accent-50/40 to-white">
+            <section className="py-12 sm:py-16 bg-gradient-to-b from-accent-50/40 to-white flex-shrink-0">
                 <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h1 className="text-4xl sm:text-5xl font-bold text-neutral-900 tracking-tight">
+                    <h1 className="text-3xl sm:text-4xl font-bold text-neutral-900 tracking-tight">
                         Simple, honest pricing
                     </h1>
-                    <p className="mt-6 text-lg text-neutral-600 leading-relaxed">
+                    <p className="mt-4 text-base text-neutral-600 leading-relaxed">
                         Start with your free chart. Upgrade when you want deeper insights.
                     </p>
                 </div>
             </section>
 
-            <section className="py-20 bg-white">
+            <section className="py-4 pb-12 bg-white flex-grow">
                 <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         {plans.map((plan) => (
                             <div
                                 key={plan.name}
                                 className={`relative p-8 rounded-2xl border ${plan.highlighted
-                                        ? 'border-accent-300 shadow-xl shadow-accent-100/50 scale-105'
-                                        : 'border-neutral-200'
+                                    ? 'border-accent-300 shadow-xl shadow-accent-100/50 scale-105'
+                                    : 'border-neutral-200'
                                     } bg-white flex flex-col`}
                             >
                                 {plan.highlighted && (
@@ -118,10 +118,10 @@ export default function PricingPage() {
                                 <Link
                                     href={plan.ctaHref}
                                     className={`block text-center px-6 py-3 rounded-xl text-sm font-semibold transition-colors ${plan.highlighted
-                                            ? 'bg-accent-700 text-white hover:bg-accent-800 shadow-sm'
-                                            : plan.comingSoon
-                                                ? 'bg-neutral-100 text-neutral-400 cursor-not-allowed'
-                                                : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'
+                                        ? 'bg-accent-700 text-white hover:bg-accent-800 shadow-sm'
+                                        : plan.comingSoon
+                                            ? 'bg-neutral-100 text-neutral-400 cursor-not-allowed'
+                                            : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'
                                         }`}
                                 >
                                     {plan.cta}
