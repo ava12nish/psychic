@@ -6,18 +6,18 @@ import type { Metadata } from 'next';
 export default function ContactPage() {
     return (
         <div>
-            <section className="py-20 sm:py-28 bg-gradient-to-b from-accent-50/40 to-white">
+            <section className="py-12 sm:py-16 bg-gradient-to-b from-accent-50/40 to-white flex-shrink-0">
                 <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h1 className="text-4xl sm:text-5xl font-bold text-neutral-900 tracking-tight">
+                    <h1 className="text-3xl sm:text-4xl font-bold text-neutral-900 tracking-tight">
                         Get in touch
                     </h1>
-                    <p className="mt-6 text-lg text-neutral-600 leading-relaxed">
+                    <p className="mt-4 text-base text-neutral-600 leading-relaxed">
                         Have a question or feedback? We&apos;d love to hear from you.
                     </p>
                 </div>
             </section>
 
-            <section className="py-20 bg-white">
+            <section className="py-4 pb-12 bg-white flex-grow">
                 <div className="max-w-xl mx-auto px-4 sm:px-6 lg:px-8">
                     <ContactForm />
                 </div>
@@ -74,7 +74,7 @@ function ContactForm() {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <form onSubmit={handleSubmit} className="space-y-4">
             {(['name', 'email', 'subject'] as const).map((field) => (
                 <div key={field}>
                     <label className="block text-sm font-medium text-neutral-700 mb-1.5 capitalize">{field === 'subject' ? 'Subject (optional)' : field}</label>
@@ -93,7 +93,7 @@ function ContactForm() {
                 <textarea
                     value={form.message}
                     onChange={(e) => { setForm({ ...form, message: e.target.value }); setErrors({ ...errors, message: '' }); }}
-                    rows={5}
+                    rows={4}
                     className={`w-full px-4 py-2.5 rounded-xl border ${errors.message ? 'border-red-400' : 'border-neutral-300'} bg-white text-sm text-neutral-900 placeholder-neutral-400 focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20 transition-all resize-none`}
                     placeholder="Tell us what's on your mind..."
                 />
