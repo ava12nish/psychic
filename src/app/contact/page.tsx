@@ -5,19 +5,19 @@ import type { Metadata } from 'next';
 
 export default function ContactPage() {
     return (
-        <div>
-            <section className="py-12 sm:py-16 bg-gradient-to-b from-accent-50/40 to-white flex-shrink-0">
+        <div className="min-h-[85vh] flex flex-col justify-center">
+            <section className="py-6 sm:py-8 bg-gradient-to-b from-accent-50/40 to-white flex-shrink-0">
                 <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                     <h1 className="text-3xl sm:text-4xl font-bold text-neutral-900 tracking-tight">
                         Get in touch
                     </h1>
-                    <p className="mt-4 text-base text-neutral-600 leading-relaxed">
+                    <p className="mt-2 text-base text-neutral-600 leading-relaxed">
                         Have a question or feedback? We&apos;d love to hear from you.
                     </p>
                 </div>
             </section>
 
-            <section className="py-4 pb-12 bg-white flex-grow">
+            <section className="py-2 pb-6 bg-white flex-grow">
                 <div className="max-w-xl mx-auto px-4 sm:px-6 lg:px-8">
                     <ContactForm />
                 </div>
